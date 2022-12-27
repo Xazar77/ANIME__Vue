@@ -1,28 +1,62 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+	<div class="wrapper">
+		<preloader-component v-if="isActive" />
+		<header-component/>
+		<router-view/>
+		<footer-component>
+			<template v-slot:smoothScrollBtn>
+				<a
+					href="/"
+					@click.prevent="smoothScroll"
+					id="scrollToTopButton"
+				><span class="arrow_carrot-up"></span></a>
+			</template>
+		</footer-component>
+
+	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HeaderComponent from "@/components/HeaderComponent.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
+import PreloaderComponent from "@/components/PreloaderComponent";
+import { scrollIntoView } from "seamless-scroll-polyfill";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+	data() {
+		return {
+			isActive: true,
+		};
+	},
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+	components: {
+		PreloaderComponent,
+		HeaderComponent,
+		FooterComponent,
+	},
+	methods: {
+		smoothScroll() {
+			scrollIntoView(document.getElementById('header'), {
+				behavior: "smooth",
+				block: "start",
+			});
+			
+		},
+		CategoriesPage() {
+
+		},
+		HomePage() {
+			document.getElementById('header').classList.add("active");
+			document.getElementById('header').classList.remove("active");
+		}
+	},
+
+	mounted() {
+		setTimeout(() => {
+			this.isActive = false;
+		}, 500);
+
+		
+	},
+};
+</script>

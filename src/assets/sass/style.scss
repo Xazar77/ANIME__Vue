@@ -1,0 +1,20 @@
+@import "variable";
+@import "mixins";
+
+@import './libs/bootstrap.min.scss';
+@import './libs/elegant-icons.scss';
+@import './libs/font-awesome.min.scss';
+
+@import "base";
+@import "header";
+@import "hero";
+@import "product";
+@import "anime-details";
+@import "anime-watching";
+@import "breadcrumb";
+@import "blog";
+@import "blog-details";
+@import "login";
+@import "signup";
+@import "footer";
+@import "responsive";
